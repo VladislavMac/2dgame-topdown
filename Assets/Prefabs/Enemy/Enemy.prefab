@@ -563,6 +563,7 @@ MonoBehaviour:
   _layersWhichRaycastSee:
     serializedVersion: 2
     m_Bits: 65
+  _patrolRotation: 0
 --- !u!195 &7652108718843915473
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -577,7 +578,7 @@ NavMeshAgent:
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 50
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

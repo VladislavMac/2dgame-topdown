@@ -36,7 +36,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
     private float _idleCooldownStart = 2;
 
     private Vector3 _patrolPosition;
-    private float _patrolRotation;
+    public float _patrolRotation;
 
     private Transform _huntObject;
 
@@ -56,7 +56,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         if (_enemyPatrol)
         {
             _patrolPosition = transform.position;
-            _patrolRotation = this.GetComponent<Rigidbody2D>().rotation;
+            _patrolRotation = transform.rotation.eulerAngles.z;
 
             Status = EnemyStatus.Patrol;
         }
@@ -221,7 +221,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
                 }
                 else
                 {
-                    FollowLookAtPosition( _patrolRotation);
+                    FollowLookAtPosition(_patrolRotation);
                 }
                 return;
             }
