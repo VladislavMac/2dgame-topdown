@@ -177,6 +177,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         {
             // Игрок наглеет! Включить интуицию
             rayCastToPlayer = Physics2D.Raycast(transform.position, _player.transform.position - transform.position, _visionLength, _layersWhichRaycastSee);
+            FollowLookAtPosition(_player.transform.position);
         }
         else
         {
@@ -253,7 +254,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
     {
 
         RaycastHit2D rayCastToPlayer;
-        rayCastToPlayer = Physics2D.Raycast(_hands.transform.position, _player.transform.position - transform.position, _visionLength, _layersWhichRaycastSee);
+        rayCastToPlayer = Physics2D.Raycast(_hands.transform.position, _player.transform.position - transform.position, _visionLength);
         
         // Если последняя позиция игрока не задана - создать
         LastPlayerPosition = _huntObject.position;
