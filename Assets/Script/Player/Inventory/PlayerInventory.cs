@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -8,32 +9,29 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject _hands; 
     [HideInInspector] public GameObject Player;
 
-    private Dictionary<GameObject, BaseWeapon> WeaponSlots = new Dictionary<GameObject, BaseWeapon>();
+    private Dictionary<BaseWeapon, int> WeaponSlots = new Dictionary<BaseWeapon, int>();
 
     private void Start()
     {
-        foreach (GameObject slot in Slots)
+        for (int i = 0; i < Slots.Length; i++)
         {
-            if (transform.childCount == 1)
-                WeaponSlots.Add(slot, slot.transform.GetChild(0).GetComponent<BaseWeapon>());
-            else
-                WeaponSlots.Add(slot, null);
+            if (Slots[i].transform.GetChild(0) != null)
+                WeaponSlots[Slots[i].transform.GetChild(0).GetComponent<BaseWeapon>()] = i;
         }
 
         _hands.GetComponent<HandController>().RemoveCurrentWeapon();
-        _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[0]);
+        _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[0], Slots, WeaponSlots);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[0]);
+            _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[0], Slots, WeaponSlots);
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[1]);
+            _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[1], Slots, WeaponSlots);
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[2]);
+            _hands.GetComponent<HandController>().SwitchCurrentWeapon(Slots[2], Slots, WeaponSlots);
     }
-
 }

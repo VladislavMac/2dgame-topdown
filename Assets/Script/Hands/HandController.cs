@@ -39,25 +39,29 @@ public class HandController : MonoBehaviour
         }
     }
 
-    public void SwitchCurrentWeapon(GameObject slot)
+    public void SwitchCurrentWeapon(GameObject slot, GameObject[] slots, Dictionary<BaseWeapon, int> weaponSlots)
     {
-        GameObject WeaponSlot = slot.transform.childCount == 1 ? slot.transform.GetChild(0).gameObject : null;
+        GameObject WeaponInSlot = slot.transform.childCount == 1 ? slot.transform.GetChild(0).gameObject : null;
         
-        if (WeaponSlot != null)
+        if (WeaponInSlot != null)
         {
 
-            WeaponSlot.transform.SetParent(transform, false);
-            WeaponSlot.transform.position = transform.position;
-            WeaponSlot.transform.rotation = transform.rotation;
+            WeaponInSlot.transform.SetParent(transform, false);
+            WeaponInSlot.transform.position = transform.position;
+            WeaponInSlot.transform.rotation = transform.rotation;
 
             if (HandWeapon != null)
             {
-                HandWeapon.gameObject.transform.SetParent(slot.transform, false); // Оружие в слот
-                HandWeapon.gameObject.transform.position = slot.transform.position;
-                HandWeapon.gameObject.transform.rotation = slot.transform.rotation;
+                if (weaponSlots.TryGetValue(HandWeapon.GetComponent<BaseWeapon>(), out int indexSlot))
+                {
+                    HandWeapon.gameObject.transform.SetParent(slots[indexSlot].transform, false);
+                    HandWeapon.gameObject.transform.position = slots[indexSlot].transform.position;
+                    HandWeapon.gameObject.transform.rotation = slots[indexSlot].transform.rotation;
+                }
             }
 
-            HandWeapon = WeaponSlot.GetComponent<BaseWeapon>();
+            HandWeapon = WeaponInSlot.GetComponent<BaseWeapon>();
+
         }
     }
 }
