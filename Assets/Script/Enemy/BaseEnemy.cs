@@ -24,7 +24,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
     [SerializeField] private bool _enemyPatrol = false;
     [SerializeField] protected LayerMask _layersWhichRaycastSee;
 
-    protected float _visionLength = 10f;
+    protected float _visionLength = 13f;
     protected float _distanceFromPlayer;
 
     protected HandController _handsController;
@@ -274,7 +274,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
                     FollowLookAtPosition(_player.transform.position);
 
                     // Охота на игрока в прямом эфире 
-                    if (_distanceFromPlayer >= 4f)
+                    if (_distanceFromPlayer >= 2.5f)
                     {
                         _aiAgent.isStopped = true;
                         GoToPosition(_player.transform.position);
