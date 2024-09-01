@@ -35,7 +35,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
     private float _idleCooldown = 0;
     private float _idleCooldownStart = 2;
 
-    [SerializeField] private Vector3 _patrolPosition;
+    private Vector3 _patrolPosition;
     private float _patrolRotation;
     private bool _patrol;
 
@@ -158,22 +158,6 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
             case EnemyStatus.Search:
                 AISearch();
                 break;
-        }
-    }
-
-    private void AISetStatus()
-    {
-        // Если игрок только что потерялся, надо идти к последней видимой позиции игрока
-        if (Status == EnemyStatus.Hunt && LastPlayerPosition != Vector3.zero && (transform.position.x != LastPlayerPosition.x && transform.position.y != LastPlayerPosition.y))
-        {
-            Status = EnemyStatus.Search;
-        }
-
-        // Если игрок потерян и this стоит на последней видимой позиции игрока
-        else if (Status == EnemyStatus.Search && LastPlayerPosition != Vector3.zero && _aiAgent.isStopped == true)
-        {
-            LastPlayerPosition = Vector3.zero;
-            Status = EnemyStatus.Idle;
         }
     }
 
