@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour, IShooter
         moveDirection.x = Input.GetAxisRaw("Horizontal");
         moveDirection.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             Shoot();
         }

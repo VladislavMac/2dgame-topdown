@@ -41,6 +41,8 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
 
     private Transform _huntObject;
 
+    /* ---------------- Set Settings ---------------- */
+
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -75,11 +77,17 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         _aiAgent.updateUpAxis = false;
     }
 
+    protected void UpdateDistanceFromPlayer()
+    {
+        _distanceFromPlayer = Vector2.Distance(transform.position, _player.transform.position);
+    }
+
     public void SetHandsOwner(HandController handsController, GameObject shooter)
     {
         handsController.Owner = shooter;
     }
 
+    /* ---------------- Virtual Methods ---------------- */
 
     public void Die()
     {
@@ -103,11 +111,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         }
     }
 
-    protected void UpdateDistanceFromPlayer()
-    {
-        _distanceFromPlayer = Vector2.Distance(transform.position, _player.transform.position);
-    }
-
+    /* ---------------- Controll Methods ---------------- */
 
     protected void GoToPosition(Vector3 needPosition)
     {
@@ -126,6 +130,8 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         this.GetComponent<Rigidbody2D>().rotation = needRotate;
     }
 
+    /* ---------------- AI Methods ---------------- */
+
     protected void AIGoToPosition(Vector3 needPosition)
     {
         _aiAgent.destination = needPosition;
@@ -136,6 +142,8 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
             Status = EnemyStatus.Idle;
         }
     }
+
+    /* ---------------- AI Logic ---------------- */
 
     protected void AILogic()
     {
@@ -192,6 +200,8 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
             }
         }
     }
+
+    /* ---------------- AI State ---------------- */
 
     private void AIIdle()
     {
