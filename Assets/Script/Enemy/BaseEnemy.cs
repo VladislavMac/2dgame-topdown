@@ -257,7 +257,8 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         
         // Если последняя позиция игрока не задана - создать
         LastPlayerPosition = _huntObject.position;
-        
+        _trigger.GetComponent<EnemyTrigger>().Warning(LastPlayerPosition);
+
         // Если видимый объект не пустота
         if (rayCastToPlayer.collider != null)
         {
