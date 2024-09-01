@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class WeaponPistol : BaseWeapon
+public class WeaponRifle : BaseWeapon
 {
     private void Update()
     {
         base.ShootCoolDown();
     }
-
 }

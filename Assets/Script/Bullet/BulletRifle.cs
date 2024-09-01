@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletPistol : BaseBullet
+public class BulletRifle : BaseBullet
 {
-    public override float Speed => 60f;
+    public override float Speed => 70f;
 }

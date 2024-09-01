@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
-    public GameObject Owner;
+    [HideInInspector] public GameObject Owner;
     public BaseWeapon HandWeapon;
 
     private void Update()
@@ -12,6 +12,11 @@ public class HandController : MonoBehaviour
         if (HandWeapon != null)
         {
             HandWeapon.Owner = Owner;
+        }
+        else
+        {
+            if (transform.GetChild(0) != null)
+                HandWeapon = transform.GetChild(0).gameObject.GetComponent<BaseWeapon>();
         }
     }
 }

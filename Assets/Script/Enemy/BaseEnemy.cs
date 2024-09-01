@@ -37,7 +37,6 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
 
     private Vector3 _patrolPosition;
     private float _patrolRotation;
-    private bool _patrol;
 
     private Transform _huntObject;
 
@@ -96,7 +95,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
 
     public void Shoot()
     {
-        int aim = _aim * 10;
+        int aim = _aim * 2;
 
         if (_cooldown <= 0)
         {
@@ -273,7 +272,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
                     FollowLookAtPosition(_player.transform.position);
 
                     // Охота на игрока в прямом эфире 
-                    if (_distanceFromPlayer >= 2f)
+                    if (_distanceFromPlayer >= 4f)
                     {
                         _aiAgent.isStopped = true;
                         GoToPosition(_player.transform.position);
