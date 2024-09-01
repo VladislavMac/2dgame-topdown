@@ -7,20 +7,16 @@ public abstract class BaseWeapon : MonoBehaviour
 {
     [HideInInspector] public GameObject Owner { get; set; }
 
-    protected private GameObject _bullet;
-    protected Transform _barrel;
-    protected float _shootCooldown;
+    [SerializeField] protected private GameObject _bullet;
+    [SerializeField] protected Transform _barrel;
+    [SerializeField] protected float _shootCooldown;
 
     protected float _cooldown;
     protected bool _canShoot = true;
 
-    protected void Initialize(GameObject bullet, Transform barrel, float shootCooldown)
+    private void Start()
     {
-        this._bullet = bullet;
-        this._barrel = barrel;
-        this._shootCooldown = shootCooldown;
-
-        this._shootCooldown = this._shootCooldown * 0.01f;
+        this._shootCooldown = this._shootCooldown * 0.1f;
         this._cooldown = this._shootCooldown;
     }
 
