@@ -5,6 +5,10 @@ using UnityEngine.XR;
 
 public abstract class BaseWeapon : MonoBehaviour
 {
+    public int MaxAmmo;
+    public float RechargeAmmo;
+    public int Ammo;
+
     [HideInInspector] public GameObject Owner { get; set; }
 
     [SerializeField] protected private GameObject _bullet;
@@ -14,10 +18,20 @@ public abstract class BaseWeapon : MonoBehaviour
     protected float _cooldown;
     protected bool _canShoot = true;
 
+    protected float _rechargeCooldown;
+
     private void Start()
     {
         this._shootCooldown = this._shootCooldown * 0.1f;
         this._cooldown = this._shootCooldown;
+        this._rechargeCooldown = RechargeAmmo;
+        this.Ammo = MaxAmmo;
+    }
+
+    private void Update()
+    {
+        RechargeWeapon();
+        if (Ammo > 0) ShootCoolDown();
     }
 
     public virtual void Shoot()
@@ -26,9 +40,39 @@ public abstract class BaseWeapon : MonoBehaviour
         {
             GameObject bullet = Instantiate(_bullet, _barrel.position, _barrel.rotation);
             bullet.GetComponent<BaseBullet>().Shooter = Owner;
+            RemoveBulletInAmmo();
         }
 
         _canShoot = false;
+    }
+
+    public void RemoveBulletInAmmo()
+    {
+        Ammo--;
+    }
+
+    public void RemoveAmmo()
+    {
+        Ammo = 0;
+    }
+
+    protected void RechargeWeapon()
+    {
+        if (Ammo <= 0)
+        {
+            _canShoot = false;
+
+            if (_rechargeCooldown <= 0)
+            {
+                _canShoot = true;
+                Ammo = MaxAmmo;
+                _rechargeCooldown = RechargeAmmo;
+            }
+            else
+            {
+                _rechargeCooldown -= Time.deltaTime;
+            }
+        }
     }
 
     protected void ShootCoolDown()

@@ -9,19 +9,12 @@ public abstract class BaseBullet : MonoBehaviour
 {
     [HideInInspector] public GameObject Shooter;
     [HideInInspector] public abstract float Speed { get; }
+    [HideInInspector] public abstract float Damage { get; }
 
     [SerializeField] protected LayerMask _layersWhichRaycastSee;
     [SerializeField] protected GameObject _bulletDirect;
 
     private float _lengthRaycast = 0.5f;
-
-    //protected void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.GetComponent<Collider2D>() && !collision.isTrigger)
-     //   {
-     //       HitSomeone(collision);
-     //   }
-    //}
 
     protected void HitSomeone(Collider2D collision) 
     {
@@ -29,7 +22,11 @@ public abstract class BaseBullet : MonoBehaviour
 
         if (collision.gameObject.GetComponent<BaseEnemy>())
         {
-            collision.GetComponent<BaseEnemy>().Die();
+            collision.GetComponent<BaseEnemy>().HitEntity(Damage);
+        }
+        if (collision.gameObject.GetComponent<PlayerController>())
+        {
+            collision.GetComponent<PlayerController>().HitEntity(Damage);
         }
     }
 

@@ -577,6 +577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Status: 0
   LastPlayerPosition: {x: 0, y: 0, z: 0}
+  Hp: 4
   _aim: 1
   _body: {fileID: 7579787325483990336}
   _hands: {fileID: 591059242726430963}

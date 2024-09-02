@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class WeaponUzi : BaseWeapon
 {
-    private void Update()
-    {
-        base.ShootCoolDown();
-    }
+
 }

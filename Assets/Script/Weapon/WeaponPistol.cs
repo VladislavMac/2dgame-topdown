@@ -5,9 +5,5 @@ using UnityEngine;
 
 public class WeaponPistol : BaseWeapon
 {
-    private void Update()
-    {
-        base.ShootCoolDown();
-    }
 
 }

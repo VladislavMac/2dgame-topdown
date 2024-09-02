@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.XR;
 
-public abstract class BaseEnemy : MonoBehaviour, IShooter
+using CustomInterface;
+
+public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
 {
     public EnemyStatus Status;
     public Vector3 LastPlayerPosition;
+    public float Hp;
 
     protected GameObject _player;
     protected NavMeshAgent _aiAgent;
@@ -39,6 +37,11 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
     public float _patrolRotation;
 
     private Transform _huntObject;
+
+    private void Update()
+    {
+        if (IsEntityDead()) Die();
+    }
 
     /* ---------------- Set Settings ---------------- */
 
@@ -81,12 +84,12 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         _distanceFromPlayer = Vector2.Distance(transform.position, _player.transform.position);
     }
 
+    /* ---------------- Realization Interface ---------------- */
+
     public void SetHandsOwner(HandController handsController, GameObject shooter)
     {
         handsController.Owner = shooter;
     }
-
-    /* ---------------- Virtual Methods ---------------- */
 
     public void Die()
     {
@@ -108,6 +111,16 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         {
             _cooldown -= Time.deltaTime;
         }
+    }
+
+    public void HitEntity(float damage)
+    {
+        Hp -= damage;
+    }
+
+    public bool IsEntityDead()
+    {
+        return Hp <= 0;
     }
 
     /* ---------------- Controll Methods ---------------- */
@@ -177,12 +190,14 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter
         {
             // Игрок наглеет! Включить интуицию
             rayCastToPlayer = Physics2D.Raycast(transform.position, _player.transform.position - transform.position, _visionLength, _layersWhichRaycastSee);
+            Debug.DrawRay(_hands.transform.position, _player.transform.position - transform.position, Color.blue);
             FollowLookAtPosition(_player.transform.position);
         }
         else
         {
             // Игрок не за спиной
             rayCastToPlayer = Physics2D.Raycast(_hands.transform.position, _player.transform.position - transform.position, _visionLength);
+            Debug.DrawRay(_hands.transform.position, _player.transform.position - transform.position, Color.green);
         }
 
         // Если видимый объект не пустота

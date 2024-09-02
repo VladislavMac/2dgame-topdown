@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInventory
+namespace CustomInterface
 {
-    public void SetInventoryPlayer();
+    public interface IInventory
+    {
+        public void SetInventoryPlayer();
+    }
 }

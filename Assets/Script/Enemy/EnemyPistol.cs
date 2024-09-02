@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EnemyPistol : BaseEnemy
 {
-
     private void FixedUpdate()
     {
         UpdateDistanceFromPlayer();

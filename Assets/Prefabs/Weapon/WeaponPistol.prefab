@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b2e32e34c6d5f40ab1985e50e6dcce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxAmmo: 10
+  RechargeAmmo: 1
   _bullet: {fileID: 6131845432044701125, guid: f4a3d4773e2883c4399fad022fd72303, type: 3}
   _barrel: {fileID: 5625294109498936400}
   _shootCooldown: 4

@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class WeaponRifle : BaseWeapon
 {
-    private void Update()
-    {
-        base.ShootCoolDown();
-    }
+
 }

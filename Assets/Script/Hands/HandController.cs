@@ -57,6 +57,7 @@ public class HandController : MonoBehaviour
                     HandWeapon.gameObject.transform.SetParent(slots[indexSlot].transform, false);
                     HandWeapon.gameObject.transform.position = slots[indexSlot].transform.position;
                     HandWeapon.gameObject.transform.rotation = slots[indexSlot].transform.rotation;
+                    HandWeapon.RemoveAmmo();
                 }
             }
 
