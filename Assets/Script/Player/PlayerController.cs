@@ -9,6 +9,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 {
     public float HpMax = 20f;
+    public int Kills = 0;
 
     [SerializeField] private float _speed = 6f;
     [SerializeField] private float _speedShift = 10f;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     [SerializeField] private GameObject _spawnPoint;
     [SerializeField] private GameObject _UIAmmo;
     [SerializeField] private GameObject[] _UIPanelHp;
+    [SerializeField] private GameObject[] _UIReactKills;
 
     private HandController _handsController;
     private Vector2 moveDirection;
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 
         Healing();
         SetPanelHp();
+        SetReactKills();
 
         if (Input.GetMouseButton(0))
         {
@@ -86,6 +89,33 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
             _UIPanelHp[2].SetActive(true);
     }
 
+    private void SetReactKills()
+    {
+        for (int i = 0; i < _UIReactKills.Length; i++)
+        {
+            _UIReactKills[i].SetActive(false);
+        }
+
+        if (Kills >= 0 && Kills < 5)
+            _UIReactKills[0].SetActive(true);
+        else if (Kills >= 5 && Kills < 10)
+            _UIReactKills[1].SetActive(true);
+        else if (Kills >= 10 && Kills < 15)
+            _UIReactKills[2].SetActive(true);
+        else if (Kills >= 15 && Kills < 20)
+            _UIReactKills[3].SetActive(true);
+        else if (Kills >= 20 && Kills < 25)
+            _UIReactKills[4].SetActive(true);
+        else if (Kills >= 25 && Kills < 30)
+            _UIReactKills[5].SetActive(true);
+        else if (Kills >= 30 && Kills < 35)
+            _UIReactKills[6].SetActive(true);
+        else if (Kills >= 35 && Kills < 40)
+            _UIReactKills[7].SetActive(true);
+        else if (Kills >= 40)
+            _UIReactKills[8].SetActive(true);
+    }
+
     /* ---------------- Realization Interface ---------------- */
 
     public void Shoot()
@@ -97,6 +127,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     {
         transform.position = _spawnPoint.transform.position;
         _hp = HpMax;
+        if (Kills != 0) Kills = 0;
     }
 
     public void SetInventoryPlayer()
@@ -117,6 +148,11 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     public bool IsEntityDead()
     {
         return _hp <= 0;
+    }
+
+    public void AddKill()
+    {
+        Kills++;
     }
 
 }

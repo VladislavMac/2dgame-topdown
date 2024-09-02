@@ -23,6 +23,7 @@ public abstract class BaseBullet : MonoBehaviour
         if (collision.gameObject.GetComponent<BaseEnemy>())
         {
             collision.GetComponent<BaseEnemy>().HitEntity(Damage);
+            Shooter.GetComponent<PlayerController>().AddKill();
         }
         if (collision.gameObject.GetComponent<PlayerController>())
         {
@@ -41,7 +42,11 @@ public abstract class BaseBullet : MonoBehaviour
         {
             if (rayCastBullet.collider.gameObject.GetComponent<Collider2D>() && !rayCastBullet.collider.isTrigger)
             {
-                HitSomeone(rayCastBullet.collider);
+                try
+                {
+                    HitSomeone(rayCastBullet.collider);
+                }
+                catch { }
             }
         }
 
