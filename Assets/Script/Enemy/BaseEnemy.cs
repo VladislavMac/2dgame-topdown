@@ -18,9 +18,11 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
     [SerializeField] protected GameObject _body;
     [SerializeField] protected GameObject _hands;
     [SerializeField] protected GameObject _trigger;
+    //[SerializeField] protected GameObject _bloodEffect;
 
     [SerializeField] private bool _enemyPatrol = false;
     [SerializeField] protected LayerMask _layersWhichRaycastSee;
+
 
     protected float _visionLength = 13f;
     protected float _distanceFromPlayer;
@@ -31,7 +33,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
     private float _cooldownAfterSeePlayer = 0.4f;
 
     private float _idleCooldown = 0;
-    private float _idleCooldownStart = 2;
+    private float _idleCooldownStart = 1;
 
     private Vector3 _patrolPosition;
     public float _patrolRotation;
@@ -116,6 +118,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
     public void HitEntity(float damage)
     {
         Hp -= damage;
+        //Instantiate(_bloodEffect, transform.position, Quaternion.identity, transform);
     }
 
     public bool IsEntityDead()
@@ -289,7 +292,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
                     FollowLookAtPosition(_player.transform.position);
 
                     // Охота на игрока в прямом эфире 
-                    if (_distanceFromPlayer >= 2.5f)
+                    if (_distanceFromPlayer >= 3f)
                     {
                         _aiAgent.isStopped = true;
                         GoToPosition(_player.transform.position);

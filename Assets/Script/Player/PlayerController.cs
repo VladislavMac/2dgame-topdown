@@ -8,7 +8,7 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 {
-    public float Hp = 20f;
+    public float HpMax = 20f;
 
     [SerializeField] private float _speed = 6f;
     [SerializeField] private float _speedShift = 10f;
@@ -17,13 +17,17 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     [SerializeField] private GameObject _hands;
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _UIAmmo;
+    [SerializeField] private GameObject _spawnPoint;
 
     private HandController _handsController;
     private Vector2 moveDirection;
 
+    public float _hp;
+
     private void Start()
     {
         _handsController = _hands.GetComponent<HandController>();
+        _hp = HpMax;
         SetHandsOwner(_handsController, this.gameObject);
         SetInventoryPlayer();
     }
@@ -32,6 +36,9 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     {
         moveDirection.x = Input.GetAxisRaw("Horizontal");
         moveDirection.y = Input.GetAxisRaw("Vertical");
+
+        if (IsEntityDead()) Die();
+        Healing();
 
         if (Input.GetMouseButton(0))
         {
@@ -45,6 +52,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 
         _UIAmmo.GetComponent<TextMeshProUGUI>().text = $"{_handsController.HandWeapon.GetComponent<BaseWeapon>().Ammo} / {_handsController.HandWeapon.GetComponent<BaseWeapon>().MaxAmmo}";
     }
+
     private void FixedUpdate()
     {
         Rigidbody2D playerRigidbody = GetComponent<Rigidbody2D>();
@@ -53,6 +61,11 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
         speed = Input.GetKey(KeyCode.LeftShift) ? _speedShift : speed;
 
         playerRigidbody.MovePosition(playerRigidbody.position + moveDirection * speed * Time.fixedDeltaTime);
+    }
+
+    private void Healing()
+    {
+        if (_hp < HpMax) _hp += Time.deltaTime * 1.3f;
     }
 
     /* ---------------- Realization Interface ---------------- */
@@ -64,7 +77,8 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 
     public void Die()
     {
-        
+        transform.position = _spawnPoint.transform.position;
+        _hp = HpMax;
     }
 
     public void SetInventoryPlayer()
@@ -79,12 +93,12 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 
     public void HitEntity(float damage)
     {
-        Hp -= damage;
+        _hp -= damage;
     }
 
     public bool IsEntityDead()
     {
-        return Hp <= 0;
+        return _hp <= 0;
     }
 
 }

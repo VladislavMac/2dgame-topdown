@@ -23,9 +23,12 @@ public class EnemyTrigger : MonoBehaviour
             if (other.gameObject.GetComponent<BaseBullet>())
             {
                 _enemyBase.Status = EnemyStatus.Search;
-                _enemyBase.LastPlayerPosition = other.GetComponent<BaseBullet>().Shooter.transform.position;
-
-                Warning(other.GetComponent<BaseBullet>().Shooter.transform.position);
+                try
+                {
+                    _enemyBase.LastPlayerPosition = other.GetComponent<BaseBullet>().Shooter.transform.position;
+                    Warning(other.GetComponent<BaseBullet>().Shooter.transform.position);
+                }
+                catch { }
             }
         }
     }
