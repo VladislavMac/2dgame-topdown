@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyPistol : BaseEnemy
 {
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateDistanceFromPlayer();
         AILogic();

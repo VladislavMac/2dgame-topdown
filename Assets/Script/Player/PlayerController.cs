@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     [SerializeField] private GameObject _inventory;
     [SerializeField] private GameObject _spawnPoint;
     [SerializeField] private GameObject _UIAmmo;
+    [SerializeField] private GameObject _UIKills;
     [SerializeField] private GameObject[] _UIPanelHp;
     [SerializeField] private GameObject[] _UIReactKills;
 
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     {
         _handsController = _hands.GetComponent<HandController>();
         _hp = HpMax;
+        _UIKills.GetComponent<TextMeshProUGUI>().text = $"{Kills}";
+
         SetHandsOwner(_handsController, this.gameObject);
         SetInventoryPlayer();
     }
@@ -76,6 +79,8 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 
     private void SetPanelHp()
     {
+        _UIKills.GetComponent<TextMeshProUGUI>().text = $"{Kills}";
+
         for (int i = 0; i < _UIPanelHp.Length; i++)
         {
             _UIPanelHp[i].SetActive(false);

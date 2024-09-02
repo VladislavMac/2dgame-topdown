@@ -40,11 +40,6 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
 
     private Transform _huntObject;
 
-    private void Update()
-    {
-        if (IsEntityDead()) Die();
-    }
-
     /* ---------------- Set Settings ---------------- */
 
     private void Start()
@@ -118,19 +113,15 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
     public void HitEntity(float damage)
     {
         Hp -= damage;
+        if (Hp <= 0) Die();
         //Instantiate(_bloodEffect, transform.position, Quaternion.identity, transform);
-    }
-
-    public bool IsEntityDead()
-    {
-        return Hp <= 0;
     }
 
     /* ---------------- Controll Methods ---------------- */
 
     protected void GoToPosition(Vector3 needPosition)
     {
-        transform.position = Vector2.MoveTowards(transform.position, needPosition, _aiAgent.speed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, needPosition, _aiAgent.speed * Time.deltaTime);
     }
 
     protected void FollowLookAtPosition(Vector3 needPosition)
@@ -193,14 +184,12 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
         {
             // Игрок наглеет! Включить интуицию
             rayCastToPlayer = Physics2D.Raycast(transform.position, _player.transform.position - transform.position, _visionLength, _layersWhichRaycastSee);
-            Debug.DrawRay(_hands.transform.position, _player.transform.position - transform.position, Color.blue);
             FollowLookAtPosition(_player.transform.position);
         }
         else
         {
             // Игрок не за спиной
             rayCastToPlayer = Physics2D.Raycast(_hands.transform.position, _player.transform.position - transform.position, _visionLength);
-            Debug.DrawRay(_hands.transform.position, _player.transform.position - transform.position, Color.green);
         }
 
         // Если видимый объект не пустота

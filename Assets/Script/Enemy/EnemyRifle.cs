@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyRifle : BaseEnemy
 {
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateDistanceFromPlayer();
         AILogic();
+
     }
 }

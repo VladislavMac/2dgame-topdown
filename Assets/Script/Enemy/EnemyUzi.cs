@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyUzi : BaseEnemy
 {
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateDistanceFromPlayer();
         AILogic();
+
     }
 }
