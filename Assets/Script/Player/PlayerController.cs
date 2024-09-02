@@ -16,13 +16,14 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     [SerializeField] private GameObject _body;
     [SerializeField] private GameObject _hands;
     [SerializeField] private GameObject _inventory;
-    [SerializeField] private GameObject _UIAmmo;
     [SerializeField] private GameObject _spawnPoint;
+    [SerializeField] private GameObject _UIAmmo;
+    [SerializeField] private GameObject[] _UIPanelHp;
 
     private HandController _handsController;
     private Vector2 moveDirection;
 
-    public float _hp;
+    private float _hp;
 
     private void Start()
     {
@@ -38,7 +39,9 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
         moveDirection.y = Input.GetAxisRaw("Vertical");
 
         if (IsEntityDead()) Die();
+
         Healing();
+        SetPanelHp();
 
         if (Input.GetMouseButton(0))
         {
@@ -66,6 +69,21 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     private void Healing()
     {
         if (_hp < HpMax) _hp += Time.deltaTime * 1.3f;
+    }
+
+    private void SetPanelHp()
+    {
+        for (int i = 0; i < _UIPanelHp.Length; i++)
+        {
+            _UIPanelHp[i].SetActive(false);
+        }
+
+        if (_hp >= 20)
+            _UIPanelHp[0].SetActive(true);
+        else if (_hp >= 10)
+            _UIPanelHp[1].SetActive(true);
+        else if (_hp > 0)
+            _UIPanelHp[2].SetActive(true);
     }
 
     /* ---------------- Realization Interface ---------------- */
