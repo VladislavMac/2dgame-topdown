@@ -10,7 +10,7 @@ public class EnemyTrigger : MonoBehaviour
     private List<GameObject> _enemiesAround = new List<GameObject>();
     private BaseEnemy _enemyBase; 
 
-
+    /*
     private void Start()
     {
         _enemyBase = EnemyGameObject.GetComponent<BaseEnemy>();
@@ -56,4 +56,5 @@ public class EnemyTrigger : MonoBehaviour
             catch { }
         }
     }
+    */
 }

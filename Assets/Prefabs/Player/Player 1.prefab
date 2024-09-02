@@ -263,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpMax: 30
+  Kills: 0
   _speed: 5
   _speedShift: 8
   _body: {fileID: 5821145583852130953}
@@ -270,10 +271,12 @@ MonoBehaviour:
   _inventory: {fileID: 2436199840458300436}
   _spawnPoint: {fileID: 0}
   _UIAmmo: {fileID: 0}
+  _UIKills: {fileID: 0}
   _UIPanelHp:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _UIReactKills: []
 --- !u!1 &5821145583852130953
 GameObject:
   m_ObjectHideFlags: 0

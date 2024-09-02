@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
     {
         _handsController = _hands.GetComponent<HandController>();
         _hp = HpMax;
-        _UIKills.GetComponent<TextMeshProUGUI>().text = $"{Kills}";
+        //_UIKills.GetComponent<TextMeshProUGUI>().text = $"{Kills}";
 
         SetHandsOwner(_handsController, this.gameObject);
         SetInventoryPlayer();
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
             _handsController.HandWeapon.GetComponent<BaseWeapon>().RemoveAmmo();
         }
 
-        _UIAmmo.GetComponent<TextMeshProUGUI>().text = $"{_handsController.HandWeapon.GetComponent<BaseWeapon>().Ammo} / {_handsController.HandWeapon.GetComponent<BaseWeapon>().MaxAmmo}";
+        //_UIAmmo.GetComponent<TextMeshProUGUI>().text = $"{_handsController.HandWeapon.GetComponent<BaseWeapon>().Ammo} / {_handsController.HandWeapon.GetComponent<BaseWeapon>().MaxAmmo}";
     }
 
     private void FixedUpdate()
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 
     private void SetPanelHp()
     {
-        _UIKills.GetComponent<TextMeshProUGUI>().text = $"{Kills}";
+        //_UIKills.GetComponent<TextMeshProUGUI>().text = $"{Kills}";
 
         for (int i = 0; i < _UIPanelHp.Length; i++)
         {
@@ -130,9 +130,9 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
 
     public void Die()
     {
-        transform.position = _spawnPoint.transform.position;
-        _hp = HpMax;
-        if (Kills != 0) Kills = 0;
+        //transform.position = _spawnPoint.transform.position;
+        //_hp = HpMax;
+        //if (Kills != 0) Kills = 0;
     }
 
     public void SetInventoryPlayer()
