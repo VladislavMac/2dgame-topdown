@@ -1182,10 +1182,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 786270581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -930.12177, y: -157}
-  m_SizeDelta: {x: 69.8228, y: -926.8459}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 29.878235, y: -157}
+  m_SizeDelta: {x: 1989.8228, y: 153.15411}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270421728
 MonoBehaviour:
@@ -7970,8 +7970,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -653.2109, y: -349.3988}
-  m_SizeDelta: {x: 315.5781, y: 187.2025}
+  m_AnchoredPosition: {x: -586.6, y: -349.3988}
+  m_SizeDelta: {x: 315.57812, y: 187.20251}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970776232
 MonoBehaviour:
@@ -50608,10 +50608,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 786270581}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 941.1826, y: -51}
-  m_SizeDelta: {x: 69.8228, y: -918.9677}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -18.817383, y: -51}
+  m_SizeDelta: {x: 1989.8228, y: 161.03229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063436346
 MonoBehaviour:
@@ -50728,11 +50728,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4993147981686442620, guid: 94bc020d6e68b6c448e50e08f0443782, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.19
+      value: -8.43
       objectReference: {fileID: 0}
     - target: {fileID: 4993147981686442620, guid: 94bc020d6e68b6c448e50e08f0443782, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7192116
+      value: 6.98
       objectReference: {fileID: 0}
     - target: {fileID: 4993147981686442620, guid: 94bc020d6e68b6c448e50e08f0443782, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50783,9 +50783,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1729167980124292072, guid: 94929484aa029ae4891d958687bfdc5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -703.65
+      objectReference: {fileID: 0}
     - target: {fileID: 1939990712673865208, guid: 94929484aa029ae4891d958687bfdc5b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2216627121655458894, guid: 94929484aa029ae4891d958687bfdc5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 706.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2928076846183441649, guid: 94929484aa029ae4891d958687bfdc5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -703.65
       objectReference: {fileID: 0}
     - target: {fileID: 5310009875732036825, guid: 94929484aa029ae4891d958687bfdc5b, type: 3}
       propertyPath: m_LocalPosition.x
