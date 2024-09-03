@@ -91,6 +91,7 @@ public abstract class BaseEnemy : MonoBehaviour, IShooter, IEntity
     public void Die()
     {
         Destroy(gameObject);
+        _player.GetComponent<PlayerController>().AddKill();
     }
 
     public void Shoot()

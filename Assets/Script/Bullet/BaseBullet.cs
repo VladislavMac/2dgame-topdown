@@ -4,6 +4,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEditor;
+using Unity.VisualScripting;
 
 public abstract class BaseBullet : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public abstract class BaseBullet : MonoBehaviour
         if (collision.gameObject.GetComponent<BaseEnemy>())
         {
             collision.GetComponent<BaseEnemy>().HitEntity(Damage);
-            Shooter.GetComponent<PlayerController>().AddKill();
         }
         if (collision.gameObject.GetComponent<PlayerController>())
         {
