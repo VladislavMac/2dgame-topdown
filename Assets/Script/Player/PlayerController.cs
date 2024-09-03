@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
         _handsController = _hands.GetComponent<HandController>();
         _hp = HpMax;
         _UIKills.GetComponent<TextMeshProUGUI>().text = $"{Kills}";
+        _UIWinPlane.SetActive(false);
 
         SetHandsOwner(_handsController, this.gameObject);
         SetInventoryPlayer();
