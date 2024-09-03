@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Weapon;
+
 public class HandController : MonoBehaviour
 {
     [HideInInspector] public GameObject Owner;

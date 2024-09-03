@@ -1,58 +1,66 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class BaseBullet : MonoBehaviour
+using Enemy;
+using Player;
+
+namespace Bullet
 {
-    [HideInInspector] public GameObject Shooter;
-    [HideInInspector] public abstract float Speed { get; }
-    [HideInInspector] public abstract float Damage { get; }
-
-    [SerializeField] protected LayerMask _layersWhichRaycastSee;
-    [SerializeField] protected GameObject _bulletDirect;
-
-    private float _lengthRaycast = 0.5f;
-
-    protected void HitSomeone(Collider2D collision) 
+    public abstract class BaseBullet : MonoBehaviour
     {
-        Destroy(transform.gameObject);
+        [HideInInspector] public GameObject Shooter;
+        [HideInInspector] public abstract float Speed { get; }
+        [HideInInspector] public abstract float Damage { get; }
 
-        if (collision.gameObject.GetComponent<BaseEnemy>())
+        [SerializeField] protected LayerMask _layersWhichRaycastSee;
+        [SerializeField] protected GameObject _bulletDirect;
+
+        private float _lengthRaycast = 0.5f;
+
+        protected void HitSomeone(Collider2D collision) 
         {
-            collision.GetComponent<BaseEnemy>().HitEntity(Damage);
-        }
-        if (collision.gameObject.GetComponent<PlayerController>())
-        {
-            collision.GetComponent<PlayerController>().HitEntity(Damage);
-        }
-    }
+            Destroy(transform.gameObject);
 
-    protected void Update()
-    {
-        RaycastHit2D rayCastBullet;
-        rayCastBullet = Physics2D.Raycast(_bulletDirect.transform.position, _bulletDirect.transform.position - transform.position, _lengthRaycast);
-
-        Debug.DrawRay(_bulletDirect.transform.position, _bulletDirect.transform.position - transform.position, Color.red, _lengthRaycast);
-
-        if (rayCastBullet.collider != null)
-        {
-            if (rayCastBullet.collider.gameObject.GetComponent<Collider2D>() && !rayCastBullet.collider.isTrigger)
+            if (collision.gameObject.GetComponent<BaseEnemy>())
             {
-                try
-                {
-                    HitSomeone(rayCastBullet.collider);
-                }
-                catch { }
+                collision.GetComponent<BaseEnemy>().HitEntity(Damage);
+            }
+            if (collision.gameObject.GetComponent<PlayerController>())
+            {
+                collision.GetComponent<PlayerController>().HitEntity(Damage);
             }
         }
 
-        transform.Translate(Vector2.up * Speed * Time.deltaTime);
+        protected void Update()
+        {
+            RaycastHit2D rayCastBullet;
+            rayCastBullet = Physics2D.Raycast(_bulletDirect.transform.position, _bulletDirect.transform.position - transform.position, _lengthRaycast);
 
-        StartCoroutine(DeleteBullet());
+            Debug.DrawRay(_bulletDirect.transform.position, _bulletDirect.transform.position - transform.position, Color.red, _lengthRaycast);
+
+            if (rayCastBullet.collider != null)
+            {
+                if (rayCastBullet.collider.gameObject.GetComponent<Collider2D>() && !rayCastBullet.collider.isTrigger)
+                {
+                    try
+                    {
+                        HitSomeone(rayCastBullet.collider);
+                    }
+                    catch { }
+                }
+            }
+
+            transform.Translate(Vector2.up * Speed * Time.deltaTime);
+
+            StartCoroutine(DeleteBullet());
+        }
+
+        protected IEnumerator DeleteBullet()
+        {
+            yield return new WaitForSeconds(2);
+            Destroy(transform.gameObject);
+        }
     }
 
-    protected IEnumerator DeleteBullet()
-    {
-        yield return new WaitForSeconds(2);
-        Destroy(transform.gameObject);
-    }
 }
+

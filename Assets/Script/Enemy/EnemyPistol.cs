@@ -1,9 +1,12 @@
 
-public class EnemyPistol : BaseEnemy
+namespace Enemy
 {
-    private void Update()
+    public class EnemyPistol : BaseEnemy
     {
-        UpdateDistanceFromPlayer();
-        AILogic();
+        private void Update()
+        {
+            UpdateDistanceFromPlayer();
+            AILogic();
+        }
     }
 }

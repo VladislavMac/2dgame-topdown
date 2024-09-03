@@ -1,10 +1,13 @@
 
-public class EnemyUzi : BaseEnemy
+namespace Enemy
 {
-    private void Update()
+    public class EnemyUzi : BaseEnemy
     {
-        UpdateDistanceFromPlayer();
-        AILogic();
+        private void Update()
+        {
+            UpdateDistanceFromPlayer();
+            AILogic();
 
+        }
     }
 }

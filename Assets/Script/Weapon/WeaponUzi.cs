@@ -1,5 +1,8 @@
 
-public class WeaponUzi : BaseWeapon
+namespace Weapon
 {
+    public class WeaponUzi : BaseWeapon
+    {
 
+    }
 }

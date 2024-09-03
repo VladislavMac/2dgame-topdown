@@ -1,8 +1,11 @@
 
-public enum EnemyStatus
+namespace Enemy
 {
-    Idle,
-    Patrol,
-    Hunt,
-    Search
+    public enum EnemyStatus
+    {
+        Idle,
+        Patrol,
+        Hunt,
+        Search
+    }
 }

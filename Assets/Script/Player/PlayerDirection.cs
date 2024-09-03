@@ -1,14 +1,18 @@
 using UnityEngine;
 
-public class PlayerDirection : MonoBehaviour
+namespace Player
 {
-    private void FixedUpdate()
+    public class PlayerDirection : MonoBehaviour
     {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        private void FixedUpdate()
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+            Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
 
-        transform.up = direction * Time.fixedDeltaTime;
+            transform.up = direction * Time.fixedDeltaTime;
+        }
     }
 }
+

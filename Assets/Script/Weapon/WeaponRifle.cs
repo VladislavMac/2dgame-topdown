@@ -1,5 +1,8 @@
 
-public class WeaponRifle : BaseWeapon
+namespace Weapon
 {
+    public class WeaponRifle : BaseWeapon
+    {
 
+    }
 }

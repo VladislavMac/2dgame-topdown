@@ -1,10 +1,13 @@
 
-public class EnemyRifle : BaseEnemy
+namespace Enemy
 {
-    private void Update()
+    public class EnemyRifle : BaseEnemy
     {
-        UpdateDistanceFromPlayer();
-        AILogic();
+        private void Update()
+        {
+            UpdateDistanceFromPlayer();
+            AILogic();
 
+        }
     }
 }
