@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class BulletUzi : BaseBullet
 {
     public override float Speed => 50f;
