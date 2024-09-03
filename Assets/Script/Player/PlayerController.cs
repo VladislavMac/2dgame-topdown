@@ -70,6 +70,11 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
             _handsController.HandWeapon.GetComponent<BaseWeapon>().RemoveAmmo();
         }
 
+        if (Input.GetKey("escape"))  
+        {
+            Application.Quit();  
+        }
+
         _UIAmmo.GetComponent<TextMeshProUGUI>().text = $"{_handsController.HandWeapon.GetComponent<BaseWeapon>().Ammo} / {_handsController.HandWeapon.GetComponent<BaseWeapon>().MaxAmmo}";
     }
 
@@ -97,7 +102,7 @@ public class PlayerController : MonoBehaviour, IShooter, IInventory, IEntity
         _UICountKills.GetComponent<TextMeshProUGUI>().text = $"{_countKills}";
         _UICountDeath.GetComponent<TextMeshProUGUI>().text = $"{_death}";
 
-        if (_countKills > 70 && _death == 0)
+        if (_countKills > 60 && _death == 0)
             result = "ТЫ БОГ";
         else if (_countKills > 0 && _countKills < 20 && _death <= 5)
             result = "Неплох";
